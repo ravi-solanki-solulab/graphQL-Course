@@ -1,0 +1,62 @@
+ type Mutation { 
+        createUser(data:createUserPayload): User!
+        createPost(post: createPostPayload): Post!
+        createComment(commentPayload:createCommentPayload):Comment!
+        deleteUser(id:ID!):User!
+        updateUser(id:ID, data: UpdateUserInput):User!
+        deletePost(postId :ID!):Post!
+        deleteComment(commentId:ID!):Comment!
+        
+    }
+
+    input createUserPayload{ 
+        email:String!
+        name:String!
+    }
+
+    input UpdateUserInput{
+        name:String
+        email:String
+    }
+    input createPostPayload{
+        title:String!
+        body:String!
+        auther:String!
+    }
+    input createCommentPayload{
+        text:String!
+        auther:String!
+        post:String!
+    }
+type Query {
+    users(query:String): [User!]!
+    posts(query:String) : [Post!]!
+    me: User!
+    scalerArray : [Int!]!
+    comments : [Comment!]!
+}
+
+type User { 
+    id: ID!
+    name: String!
+    email:String!
+    age : Int
+    posts: [Post!]!
+    comments : [Comment]
+}
+
+type Post  { 
+    id: ID!
+    title: String!
+    body: String!
+    publishedAt: String!
+    auther : User!
+    comments : [Comment]
+}
+
+type Comment { 
+    id: String!
+    text: String!
+    autherOfTheComment: User,
+    post: Post
+}
