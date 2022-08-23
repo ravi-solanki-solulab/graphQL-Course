@@ -1,9 +1,10 @@
 const Comment = {
-    autherOfTheComment(parent, args, context, info) {
+    autherOfTheComment(parent, args, { db }, info) {
         return db.users.find((user) => {
             return user.id === parent.autherOfTheComment;
         })
     },
+    
     post(parent, args, { db }, info) {
 
         return db.posts.find((post) => {

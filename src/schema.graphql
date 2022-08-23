@@ -1,23 +1,32 @@
- type Mutation { 
-        createUser(data:createUserPayload): User!
+ type Mutation { createUser(data:createUserPayload): User!
         createPost(post: createPostPayload): Post!
         createComment(commentPayload:createCommentPayload):Comment!
         deleteUser(id:ID!):User!
         updateUser(id:ID, data: UpdateUserInput):User!
+        updateComment(id:ID, text:String!): Comment!
         deletePost(postId :ID!):Post!
         deleteComment(commentId:ID!):Comment!
-        
-    }
+    } 
 
-    input createUserPayload{ 
+   
+ type Subscription{
+        count: Int
+        comment(postId:String): CommentSubscriptionPaylaod! 
+        post:PostSubscriptionPayload!
+    }
+ 
+ input createUserPayload{ 
         email:String!
         name:String!
+        age: Int
     }
 
     input UpdateUserInput{
         name:String
         email:String
+        age:Int
     }
+    
     input createPostPayload{
         title:String!
         body:String!
@@ -28,6 +37,7 @@
         auther:String!
         post:String!
     }
+
 type Query {
     users(query:String): [User!]!
     posts(query:String) : [Post!]!
@@ -60,3 +70,20 @@ type Comment {
     autherOfTheComment: User,
     post: Post
 }
+
+type PostSubscriptionPayload { 
+    mutation :  MutationType!
+    data: Post! 
+}
+type CommentSubscriptionPaylaod{ 
+    mutation: MutationType!
+    data:Comment!
+}
+enum MutationType {
+ CREATED
+ UPDATED
+ DELETED
+}
+ 
+
+

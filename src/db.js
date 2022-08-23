@@ -1,6 +1,5 @@
 const posts = [
     {
-
         id: "12345xyz",
         title: "moon",
         body: "moon is in the sky",
@@ -9,7 +8,6 @@ const posts = [
         comments: ["1", "3"]
     },
     {
-
         id: "12345xya",
         title: "sun",
         body: "sun is of yellow color",
@@ -73,6 +71,6 @@ const comments = [
     }
 ]
 
-const db =  {  users, comments, posts}
+const db = { users, comments, posts }
 
 export { db as default };
